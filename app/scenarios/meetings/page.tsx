@@ -238,7 +238,8 @@ export default function MeetingsScenario() {
 
   const startListening = () => {
     if (!hasSpeechSupport) return
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
     const recognition = new SpeechRecognition()
     recognition.continuous = false
     recognition.interimResults = false
