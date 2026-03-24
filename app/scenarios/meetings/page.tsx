@@ -244,7 +244,7 @@ export default function MeetingsScenario() {
     recognition.continuous = false
     recognition.interimResults = false
     recognition.lang = 'en-GB'
-    recognition.onresult = (e) => {
+    recognition.onresult = (e: any) => {
       const transcript = e.results[0][0].transcript
       setUserInput(transcript)
       setIsListening(false)
