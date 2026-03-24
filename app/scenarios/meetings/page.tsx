@@ -164,7 +164,7 @@ export default function MeetingsScenario() {
   const [startTime] = useState(Date.now())
   const [hasSpeechSupport] = useState(checkSpeechSupport)
 
-  const recognitionRef = useRef<SpeechRecognition | null>(null)
+  const recognitionRef = useRef<any>(null)
   const supabase = createClient()
 
   const currentExercise = exercises[exerciseIndex]
