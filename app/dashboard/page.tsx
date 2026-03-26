@@ -144,15 +144,16 @@ const minutesRemaining = Math.max(0, 160 - monthlyMinutesUsed)
                 <p>{rp.situation.substring(0, 100)}...</p>
                 <div className="roleplay-footer">
                   <span className="function-tag">{rp.function}</span>
-                  {isPro ? (
-                    <Link href={`/roleplay/${rp.id}`} className="btn-practice">
-                      Start AI session →
-                    </Link>
-                  ) : (
-                    <Link href={`/roleplay/${rp.id}`} className="btn-practice">
-                      Practice →
-                    </Link>
-                  )}
+                  <div className="card-actions">
+                    {rp.audio_generated && (
+                      <Link href={`/free/${rp.id}`} className="btn-free-sm">🎧 Listen & practise</Link>
+                    )}
+                    {isPro ? (
+                      <Link href={`/roleplay/${rp.id}`} className="btn-practice">AI session →</Link>
+                    ) : (
+                      <Link href={`/roleplay/${rp.id}`} className="btn-practice-pro">🤖 AI (Pro) →</Link>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
@@ -280,6 +281,12 @@ const minutesRemaining = Math.max(0, 160 - monthlyMinutesUsed)
         .btn-primary:hover { background: var(--gold-light); }
         .btn-gold { background: var(--gold); color: var(--navy); border: none; padding: 12px 24px; border-radius: 10px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; white-space: nowrap; transition: all 0.2s; }
         .btn-gold:hover { background: var(--gold-light); }
+
+        .card-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+        .btn-free-sm { background: rgba(104,211,145,0.15); color: #276749; border: 1px solid rgba(104,211,145,0.3); padding: 7px 12px; border-radius: 8px; font-family: inherit; font-size: 12px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+        .btn-free-sm:hover { background: rgba(104,211,145,0.25); }
+        .btn-practice-pro { background: rgba(128,90,213,0.1); color: #805ad5; border: 1px solid rgba(128,90,213,0.3); padding: 7px 12px; border-radius: 8px; font-family: inherit; font-size: 12px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+
         @media (max-width: 900px) {
           .sidebar { display: none; }
           .main { margin-left: 0; max-width: 100vw; padding: 24px 16px; }

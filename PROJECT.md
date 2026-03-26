@@ -29,11 +29,18 @@ B2B outreach to small businesses and language schools as primary early revenue s
 - **Free tier:** 3 new roleplays unlocked per week, permanently unlocked
   once accessed, unlimited retries
 - **Single roleplay ($3):** Unlocks that specific roleplay permanently +
-  adds 3 bonus unlocks. 1 AI conversation session (20 min max)
+  adds 3 bonus unlocks. 20 minutes of AI conversation time
 - **Pro subscription ($12/month):** Full access to ALL roleplays for
-  duration of subscription. 8 AI sessions included per month (20 min max each)
-- **Add-on pack:** 5 extra AI sessions for $4
+  duration of subscription. 160 minutes of AI conversation included per month
+- **Add-on pack:** 60 extra minutes for $4
 - **Teams/B2B:** Custom pricing (Phase 8)
+
+## Session Rules
+- Maximum 20 minutes per session
+- Monthly time tracked to the second, displayed as "X minutes remaining"
+- Monthly minutes reset on the 1st of each month
+- Ending a session early does not waste remaining session time —
+  only actual minutes used are deducted
 
 ## Subscription Management
 - Subscription can be paused for 1 month (retains access until pause date,
@@ -171,7 +178,7 @@ Each roleplay consists of:
 - Route protection via proxy middleware
 - Session saving to Supabase
 
-### 🔄 Phase 3 — Roleplay Engine + AI Conversation
+### 🔄 Phase 3 — Roleplay Engine + AI Conversation (COMPLETE)
 - Redesign database for roleplay format
 - `roleplays` and `feedback` tables in Supabase
 - Roleplay page fetches from database (not hardcoded)
