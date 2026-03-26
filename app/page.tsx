@@ -228,6 +228,7 @@ export default function LandingPage() {
             <a href="mailto:hello@businessenglishai.com">Contact</a>
             <Link href="/privacy">Privacy</Link>
             <Link href="/terms">Terms</Link>
+            <Link href="/refund">Refunds</Link>
           </div>
           <p className="footer-copy">© 2025 BusinessEnglishAI. All rights reserved.</p>
         </div>

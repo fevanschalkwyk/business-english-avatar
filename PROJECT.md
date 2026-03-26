@@ -192,7 +192,7 @@ Each roleplay consists of:
 - Usage tracking (session count, 20-min time limit)
 - Update all "scenario" language to "roleplay" across site
 
-### 🔄 Phase 4 — Free Tier Audio
+### ✅ Phase 4 — Free Tier Audio (COMPLETE)
 - Pre-recorded audio generation per roleplay (Azure TTS)
 - Audio storage in Supabase Storage
 - Word-by-word highlighting synced to audio
