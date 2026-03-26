@@ -638,8 +638,7 @@ function Style() {
       .word { transition: all 0.1s; }
       .word-active { background: rgba(201,168,76,0.4); border-radius: 3px; padding: 0 1px; font-weight: 600; }
       .word-done { opacity: 0.7; }
-      .phrase-highlight { background: rgba(201,168,76,0.25); border-radius: 4px; padding: 1px 3px; font-weight: 500; border-bottom: 2px solid var(--gold); }
-
+      .phrase-highlight { background: var(--gold); color: #0a1628 !important; border-radius: 4px; padding: 2px 6px; font-weight: 800; font-size: 1.02em; }
       /* PRACTICE CONTROLS */
       .practice-controls { margin-top: 8px; }
       .read-prompt { font-size: 13px; color: #276749; font-weight: 600; margin-bottom: 8px; }
