@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
         if (!profile) break;
 
         for (const item of tx.details?.lineItems ?? []) {
-          const priceId = item.price?.id;
+            const priceId = item.priceId;
 
           if (priceId === process.env.NEXT_PUBLIC_PADDLE_PRICE_ADDON_MINUTES) {
             await supabase
