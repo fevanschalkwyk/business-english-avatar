@@ -339,7 +339,7 @@ export default function FreeTierRoleplayPage() {
             >
               🔄 Practise again
             </button>
-            <Link href={`/roleplay/${roleplayId}`} className="btn-gold">
+            <Link href="/pricing" className="btn-gold">
               Try with AI partner →
             </Link>
             <Link href="/dashboard" className="btn-primary">
@@ -348,7 +348,7 @@ export default function FreeTierRoleplayPage() {
           </div>
           <div className="upgrade-nudge">
             <p>Ready for a real conversation? Upgrade to Pro and practise with an AI partner who responds to anything you say.</p>
-            <Link href="/upgrade" className="btn-upgrade">Upgrade to Pro →</Link>
+            <Link href="/pricing" className="btn-upgrade">Upgrade to Pro — $12/month →</Link>
           </div>
         </div>
         <Style />
