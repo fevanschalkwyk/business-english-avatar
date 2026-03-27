@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
         const isNewActivation =
           event.eventType === EventName.SubscriptionCreated ||
           (event.eventType === EventName.SubscriptionUpdated &&
-            profile.subscription_status !== "pro" &&
+            (profile as any).subscription_status !== "pro" &&
             status === "active");
 
         await supabase
@@ -106,20 +106,20 @@ export async function POST(req: NextRequest) {
 
         const { data: profile } = await supabase
           .from("profiles")
-          .select("id, minutes_remaining")
+          .select("id, minutes_remaining, ai_sessions_remaining")
           .eq("paddle_customer_id", customerId)
           .single();
 
         if (!profile) break;
 
         for (const item of tx.details?.lineItems ?? []) {
-            const priceId = item.priceId;
+          const priceId = item.priceId;
 
           if (priceId === process.env.NEXT_PUBLIC_PADDLE_PRICE_ADDON_MINUTES) {
             await supabase
               .from("profiles")
               .update({
-                minutes_remaining: (profile.minutes_remaining ?? 0) + ADDON_MINUTES,
+                minutes_remaining: ((profile as any).minutes_remaining ?? 0) + ADDON_MINUTES,
               })
               .eq("id", profile.id);
 
@@ -135,26 +135,23 @@ export async function POST(req: NextRequest) {
           }
 
           if (priceId === process.env.NEXT_PUBLIC_PADDLE_PRICE_SINGLE_ROLEPLAY) {
-            const roleplayId = (tx.customData as { roleplay_id?: string })?.roleplay_id;
+            await supabase
+              .from("profiles")
+              .update({
+                ai_sessions_remaining: ((profile as any).ai_sessions_remaining ?? 0) + 1,
+              })
+              .eq("id", profile.id);
 
             await supabase.from("purchases").insert({
               user_id: profile.id,
               paddle_transaction_id: tx.id,
               purchase_type: "single_roleplay",
-              roleplay_id: roleplayId ?? null,
+              roleplay_id: null,
               amount_cents: Math.round(
                 parseFloat(tx.details?.totals?.total ?? "0") * 100
               ),
               currency: tx.currencyCode ?? "USD",
             });
-
-            if (roleplayId) {
-              await supabase.from("unlocks").upsert({
-                user_id: profile.id,
-                roleplay_id: roleplayId,
-                unlocked_at: new Date().toISOString(),
-              });
-            }
           }
         }
 
