@@ -13,7 +13,9 @@ export function PricingCards() {
   async function handleCheckout(priceId: string, label: string) {
     setLoading(label);
     try {
+      console.log("Initialising Paddle with token:", process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN);
       const paddle = await getPaddleInstance();
+      console.log("Paddle instance:", paddle);
       await paddle.Checkout.open({
         items: [{ priceId, quantity: 1 }],
       });
@@ -78,9 +80,9 @@ export function PricingCards() {
         </button>
       </div>
 
-      {/* Add-on */}
+      {/* Pro Add-on */}
       <div style={{ backgroundColor: "#0d1f3c", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "20px", padding: "36px", display: "flex", flexDirection: "column" }}>
-        <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "12px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "16px" }}>Add-on</div>
+        <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "12px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "16px" }}>Pro Add-on</div>
         <div style={{ fontSize: "48px", fontWeight: "bold", color: "white", marginBottom: "4px" }}>$4</div>
         <div style={{ color: "rgba(255,255,255,0.4)", fontSize: "14px", marginBottom: "32px" }}>one-time</div>
         <ul style={{ listStyle: "none", padding: 0, margin: "0 0 32px 0", display: "flex", flexDirection: "column", gap: "12px", flex: 1 }}>
