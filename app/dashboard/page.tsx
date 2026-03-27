@@ -14,6 +14,41 @@ export default async function DashboardPage() {
     .eq('id', user.id)
     .single()
 
+  // Create Paddle customer if not yet created
+  if (!profile?.paddle_customer_id) {
+    try {
+      const { paddle } = await import('@/lib/paddle')
+      const customer = await paddle.customers.create({
+        email: user.email!,
+        name: profile?.full_name ?? undefined,
+      })
+      await supabase
+        .from('profiles')
+        .update({ paddle_customer_id: customer.id })
+        .eq('id', user.id)
+    } catch (err) {
+      console.error('Failed to create Paddle customer:', err)
+    }
+  }
+
+
+  // Create Paddle customer if not yet created
+  if (!profile?.paddle_customer_id) {
+    try {
+      const { paddle } = await import('@/lib/paddle')
+      const customer = await paddle.customers.create({
+        email: user.email!,
+        name: profile?.full_name ?? undefined,
+      })
+      await supabase
+        .from('profiles')
+        .update({ paddle_customer_id: customer.id })
+        .eq('id', user.id)
+    } catch (err) {
+      console.error('Failed to create Paddle customer:', err)
+    }
+  }
+
   const { data: sessions } = await supabase
     .from('sessions')
     .select('*, roleplays(title)')
