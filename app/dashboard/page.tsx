@@ -83,7 +83,7 @@ const displayName = profile?.full_name || user.email?.split('@')[0] || 'there'
 const sessionCount = sessions?.length ?? 0
 const totalMinutes = sessions?.reduce((acc: number, s: any) => acc + Math.round((s.duration_seconds || 0) / 60), 0) ?? 0
 const isPro = profile?.subscription_tier === 'pro'
-const minutesRemaining = Math.max(0, 160 - monthlyMinutesUsed)
+const minutesRemaining = profile?.minutes_remaining ?? 0
 
   const CEFR_COLORS: Record<string, string> = {
     A1: '#fc8181', A2: '#f6ad55', B1: '#68d391',
