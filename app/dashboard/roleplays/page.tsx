@@ -3,6 +3,9 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import SignOutButton from '@/components/SignOutButton'
 import UnlockButton from '@/components/UnlockButton'
+import SessionUnlockButton from '@/components/roleplays/SessionUnlockButton'
+
+
 
 export default async function RoleplaysPage({
   searchParams,
@@ -208,11 +211,7 @@ export default async function RoleplaysPage({
                     <UnlockButton roleplayId={rp.id} />
                   ) : (
                     <div className="locked-message">
-                      {weeklyUnlocksRemaining === 0
-                        ? '🔒 No unlocks left this week'
-                        : '🔒 Locked'
-                      }
-                      <Link href="/upgrade" className="btn-upgrade-sm">Upgrade for full access</Link>
+                      <SessionUnlockButton />
                     </div>
                   )}
                 </div>
@@ -238,7 +237,7 @@ export default async function RoleplaysPage({
                 <p>Get full access to all roleplays plus AI conversation, voice, and CEFR feedback.</p>
               </div>
             </div>
-            <Link href="/upgrade" className="btn-gold">Upgrade for $12/mo →</Link>
+            <Link href="/pricing" className="btn-gold">Upgrade for $12/mo →</Link>
           </div>
         )}
       </main>

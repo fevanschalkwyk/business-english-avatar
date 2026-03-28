@@ -203,7 +203,7 @@ Each roleplay consists of:
 - 3 roleplays/week unlock system
 - `unlocks` table in Supabase
 
-### 🔄 Phase 5 — Payments
+### 🔄 Phase 5 — Payments (COMPLETE)
 - Paddle subscription ($12/month) — full roleplay access
 - Paddle one-time payment ($3/roleplay) — unlocks roleplay + 3 bonus unlocks
 - Add-on session packs ($4 for 5 sessions)
