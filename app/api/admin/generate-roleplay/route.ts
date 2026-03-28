@@ -41,30 +41,39 @@ Guidelines:
 - Each line should be 1-3 sentences
 - Make the dialogue flow naturally`
 
-  try {
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'llama3-70b-8192',
-        messages: [{ role: 'user', content: prompt }],
-        temperature: 0.7,
-        max_tokens: 2000,
-      }),
-    })
+try {
+  const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: 'llama3-70b-8192',
+      messages: [{ role: 'user', content: prompt }],
+      temperature: 0.7,
+      max_tokens: 2000,
+    }),
+  })
 
-    const data = await response.json()
-    const content = data.choices[0]?.message?.content
+  const data = await response.json()
+  console.log('Groq response status:', response.status)
+  console.log('Groq response data:', JSON.stringify(data).substring(0, 500))
 
-    const clean = content.replace(/```json|```/g, '').trim()
-    const parsed = JSON.parse(clean)
-
-    return NextResponse.json(parsed)
-  } catch (err) {
-    console.error('Generation error:', err)
-    return NextResponse.json({ error: 'Generation failed' }, { status: 500 })
+  if (!response.ok) {
+    return NextResponse.json({ error: 'Groq API error', details: data }, { status: 500 })
   }
+
+  const content = data.choices[0]?.message?.content
+  if (!content) {
+    return NextResponse.json({ error: 'No content from Groq' }, { status: 500 })
+  }
+
+  const clean = content.replace(/```json|```/g, '').trim()
+  const parsed = JSON.parse(clean)
+  return NextResponse.json(parsed)
+} catch (err) {
+  console.error('Generation error:', err)
+  return NextResponse.json({ error: String(err) }, { status: 500 })
+}
 }
